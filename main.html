@@ -1,14 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>ToDo List</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        
+      <div class="logo-container">
+        <img
+          class="logo"
+          src="https://logo.com/image-cdn/images/kts928pd/production/9fa92ac5a9498502d2707ced798d763fe7490ecc-1600x1026.png?w=1920&q=72&fm=webp"
+          alt=""
+        />
+      </div>
+      <div class="active-tasks">
+        Active Tasks : <span class="active-tasks-number">0</span>
+      </div>
+      <div class="today-tasks">
+        <p>Today's Tasks : <span class="today-tasks-number">0</span></p>
+      </div>
     </header>
-</body>
+
+    <main>
+      <div class="side-box">
+        <div class="calender"></div>
+        <div class="tasks-status">
+          <div class="show-all"><img src="./icons/all.svg" alt=""><p class="all-text">All</p><p class="all-num">0</p></div>
+          <div class="show-active"><img src="./icons/active.svg" alt=""><p class="active-text">Actives</p><p class="active-num">0</p></div>
+          <div class="show-today"><img src="./icons/today.svg" alt=""><p class="today-text">Today</p><p class="today-num">0</p></div>
+          <div class="show-important"><img src="./icons/important.svg" alt=""><p class="important-text">Important</p><p class="important-num">0</p></div>
+          <div class="show-completed"><img src="./icons/complete.svg" alt=""><p class="completed-text">Completed</p></div>
+        </div>
+        <div class="today-progress-bar-container">
+          <div>
+            <div class="today-task-text">Today's Tasks</div>
+            <div class="today-task-text-total">
+              <span class="today-completed-task">1</span> /
+              <span class="today-total-task">2</span>
+            </div>
+          </div>
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="tasks">
+        <div class="task-info">
+          <div class="task-name">Task Name</div>
+          <div class="task-date">Task Date</div>
+        </div>
+        <div class="check-box">
+          <input type="checkbox" class="is-completed" />
+          <input type="checkbox" class="is-important" />
+        </div>
+        <div class="task-buttons">
+          <button class="edit-task">Edit</button>
+          <button class="delete-task">Delete</button>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

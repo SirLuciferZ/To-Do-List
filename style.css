@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+
+header {
+    background-color: rgb(230, 230, 230);
+    box-shadow: 0 0 2px black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    margin-bottom: 50px;
+    font-size: 20px;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+
+.logo-container {
+    /* margin-right: auto; */
+    flex: 1;
+
+}
+
+.logo {
+    width: 60px;
+
+}
+
+/* .today-tasks p{
+    margin-right: 20px;
+
+} */
+.today-tasks {
+    flex: 1;
+    /* margin-left: auto; */
+    text-align: right;
+    padding-right: 40px;
+
+}
+
+.active-tasks {
+    flex: 1;
+    text-align: center;
+}
+
+
+
+/* Side Box */
+
+.side-box {
+    background-color: rgb(231, 231, 231);
+    position: fixed;
+    min-width: 400px;
+    min-height: 100vh;
+    top: 0;
+    padding-top: 60px;
+    box-shadow: 0 0 5px black inset;
+}
+
+.calender {}
+
+.tasks-status {
+    display: grid;
+    grid-template-columns: 175px 175px;
+    align-items: center;
+    padding: 20px 10px;
+    border-bottom: 1px solid black;
+    font-size: 20px;
+    row-gap: 10px;
+    column-gap: 15px;
+}
+
+.show-important,
+.show-all,
+.show-today,
+.show-completed,
+.show-active {
+
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-align: center;
+    min-height: 78px;
+    position: relative;
+    background-color: rgb(210, 210, 210);
+    transition: 0.15s;
+}
+
+.show-important:hover,
+.show-all:hover,
+.show-today:hover,
+.show-completed:hover,
+.show-active:hover {
+    background-color: rgb(181, 181, 181);
+    transform: scale(1.05);
+    transition: 0.15s;
+}
+
+.show-important img,
+.show-today img,
+.show-completed img,
+.show-active img,
+.show-all img {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    background-color: red;
+    box-shadow: 0 0 3px black inset, 0 0 3px black;
+    border-radius: 100px;
+    padding: 5px;
+}
+
+.important-text,
+.today-text,
+.all-text,
+.active-text,
+.completed-text {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    font-weight: 600;
+    color: rgb(73, 73, 73);
+}
+
+.important-num,
+.today-num,
+.all-num,
+.active-num {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(73, 73, 73);
+}
+
+.show-important img {
+    background-color: red;
+}
+
+.show-today img {
+    background-color: blue;
+}
+
+.show-completed img {
+    background-color: gray;
+}
+
+.show-active img {
+    background-color: green;
+}
+
+.show-all img {
+    background-color: purple;
+}
