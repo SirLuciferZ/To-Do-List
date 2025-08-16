@@ -1,0 +1,46 @@
+
+
+! Not Completed 
+? Details
+TODO: idk
+* Completed
+// Regected Ideas
+
+
+! add a header
+? right : a logo
+? left : total tasks
+? center : todays tasks
+
+
+! a box on the right side of the body
+? a calender
+? 3 buttons for all , active , completed
+? progress bar for todays tasks
+
+
+! a task list that shows :
+? task name
+? task due date
+
+
+! Task Check Boxes
+? for completion
+? highlight a task as important
+
+
+! Task buttons
+? edit task
+? remove task
+
+
+! by clicking on tasks name
+? open a detailed task info :
+? contains :
+? name
+? tag
+? status
+? due date
+? create date
+? reminder
+? color
