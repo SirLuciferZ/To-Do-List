@@ -21,7 +21,8 @@ TODO: idk
 
 ! a task list that shows :
 ? task name
-? task due date
+? task reminder date / tags / note
+? a checkbox for completion
 
 
 ! Task Check Boxes

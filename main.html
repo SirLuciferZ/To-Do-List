@@ -15,15 +15,14 @@
           alt=""
         />
       </div>
-      <div class="active-tasks">
-        Active Tasks : <span class="active-tasks-number">0</span>
-      </div>
-      <div class="today-tasks">
-        <p>Today's Tasks : <span class="today-tasks-number">0</span></p>
+      <div class="button-header-container">
+        <img class="upload-img" src="./icons/upload.svg" alt="">
+        <img class="all-list-img" src="./icons/all-list.svg" alt="">
+        <img class="add-task-img" src="./icons/add-task.svg" alt="">
       </div>
     </header>
 
-    <main>
+    <nav>
       <div class="side-box">
         <div class="search">
           <img src="./icons/search.svg" alt="" />
@@ -110,21 +109,84 @@
           </div>
         </div>
       </div>
+    </nav>
+    <main>
 
-      <div class="tasks">
-        <div class="task-info">
-          <div class="task-name">Task Name</div>
-          <div class="task-date">Task Date</div>
-        </div>
-        <div class="check-box">
+      <div class="main-header-container">
+        <p class="active-list-name">Reminders</p>
+        <p class="active-list-tasks">0</p>
+      </div>
+
+      <div class="complete-clear">
+        <p class="completed-num">0</p>
+        <p>Completed</p>
+        <p>&middot;</p>
+        <p class="clear-completed">Clear</p>
+      </div>
+
+
+      <div class="task-container">
+        <div class="tasks">
           <input type="checkbox" class="is-completed" />
-          <input type="checkbox" class="is-important" />
+          <div class="task-info">
+            <div class="task-name">Task Name</div>
+            <div class="task-note">very important</div>
+            <div class="tag-date">
+              <div class="task-date">22/04/2023</div>
+              <div class="task-tags"># home</div>
+            </div>
+          </div>
         </div>
-        <div class="task-buttons">
-          <button class="edit-task">Edit</button>
-          <button class="delete-task">Delete</button>
+                <div class="tasks">
+          <input type="checkbox" class="is-completed" />
+          <div class="task-info">
+            <div class="task-name">Task Name</div>
+            <div class="task-note">very important</div>
+            <div class="tag-date">
+              <div class="task-date">22/04/2023</div>
+              <div class="task-tags"># home</div>
+            </div>
+          </div>
         </div>
+                <div class="tasks">
+          <input type="checkbox" class="is-completed" />
+          <div class="task-info">
+            <div class="task-name">Task Name</div>
+            <div class="task-note">very important</div>
+            <div class="tag-date">
+              <div class="task-date">22/04/2023</div>
+              <div class="task-tags"># home</div>
+            </div>
+          </div>
+        </div>
+                <div class="tasks">
+          <input type="checkbox" class="is-completed" />
+          <div class="task-info">
+            <div class="task-name">Task Name</div>
+            <div class="task-note">very important</div>
+            <div class="tag-date">
+              <div class="task-date">22/04/2023</div>
+              <div class="task-tags"># home</div>
+            </div>
+          </div>
+        </div>
+                <div class="tasks">
+          <input type="checkbox" class="is-completed" />
+          <div class="task-info">
+            <div class="task-name">Task Name</div>
+            <div class="task-note">very important</div>
+            <div class="tag-date">
+              <div class="task-date">22/04/2023</div>
+              <div class="task-tags"># home</div>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </main>
+
+    <div class="add-task-popup">
+      
+    </div>
   </body>
 </html>

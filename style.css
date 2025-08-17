@@ -7,8 +7,7 @@
 /* Header */
 
 header {
-    background-color: rgb(230, 230, 230);
-    box-shadow: 0 0 2px black;
+   
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,23 +30,20 @@ header {
     width: 60px;
 
 }
-
-/* .today-tasks p{
-    margin-right: 20px;
-
-} */
-.today-tasks {
+.button-header-container{
+    display: flex;
     flex: 1;
-    /* margin-left: auto; */
-    text-align: right;
-    padding-right: 40px;
-
+    justify-content: right;
+    padding-right: 50px;
+    column-gap: 20px;
+}
+.button-header-container img{
+    width: 30px;
+    cursor: pointer;
 }
 
-.active-tasks {
-    flex: 1;
-    text-align: center;
-}
+
+
 
 
 
@@ -59,7 +55,7 @@ header {
     max-width: 450px;
     min-height: 100vh;
     top: 0;
-    padding-top: 60px;
+    padding-top: 30px;
     box-shadow: 0 0 5px black inset;
 }
 
@@ -247,12 +243,14 @@ header {
     display: flex;
     align-items: center;
 }
-.add-list::before{
+
+.add-list::before {
     content: url(./icons/add-list.svg);
     margin-right: 5px;
     margin-top: 6px;
 }
-.add-list:hover{
+
+.add-list:hover {
     color: rgb(0, 0, 0);
     cursor: pointer;
 }
@@ -263,7 +261,6 @@ header {
     font-weight: 600;
     margin-left: 5px;
     margin-top: 10px;
-    margin-bottom: 5px;
     color: rgb(107, 107, 107);
 }
 
@@ -294,7 +291,7 @@ header {
 }
 
 .lists img {
-    width: 40px;
+    width: 30px;
     background-color: red;
     border-radius: 50%;
     padding: 5px;
@@ -349,4 +346,112 @@ header {
 .tag p:hover {
     transform: scale(1.05);
     cursor: pointer;
+}
+
+
+
+/*          main page            */
+
+
+main {
+    padding-left: 450px;
+    padding-top: 70px;
+}
+
+
+.main-header-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    font-size: 40px;
+    color: rgb(0, 110, 255);
+    font-weight: 600;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.complete-clear{
+    display: flex;
+    margin-left: 20px;
+    column-gap: 5px;
+    font-size: 17px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.202);
+    padding-bottom: 10px;
+    color: #555;
+    font-weight: 500;
+}
+
+.clear-completed{
+    color: rgb(0, 98, 255);
+    cursor: pointer;
+}
+
+
+.task-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tasks {
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.is-completed {
+    margin-right: 20px;
+    appearance: none;
+    /* Remove default OS checkbox */
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    /* Makes it a circle */
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: 0.15s;
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+.is-completed:checked {
+    background-color: #654caf;
+    /* Fill color */
+}
+
+.is-completed:checked::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+}
+
+.task-info{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    width: 100%;
+    padding-bottom: 10px;
+    font-weight: 500;
+}
+
+.task-tags{
+    color: rgb(57, 123, 255);
+}
+.task-name{
+    font-weight: 700;
+}
+.task-note{
+    color: #555;
+}
+.tag-date{
+    display: flex;
+    column-gap: 20px;
 }
