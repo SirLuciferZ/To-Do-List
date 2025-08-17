@@ -56,7 +56,7 @@ header {
 .side-box {
     background-color: rgb(231, 231, 231);
     position: fixed;
-    min-width: 400px;
+    min-width: 450px;
     min-height: 100vh;
     top: 0;
     padding-top: 60px;
@@ -67,7 +67,7 @@ header {
 
 .tasks-status {
     display: grid;
-    grid-template-columns: 175px 175px;
+    grid-template-columns: 200px 200px;
     align-items: center;
     padding: 20px 10px;
     border-bottom: 1px solid black;
