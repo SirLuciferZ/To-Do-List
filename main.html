@@ -16,9 +16,9 @@
         />
       </div>
       <div class="button-header-container">
-        <img class="upload-img" src="./icons/upload.svg" alt="">
-        <img class="all-list-img" src="./icons/all-list.svg" alt="">
-        <img class="add-task-img" src="./icons/add-task.svg" alt="">
+        <img class="upload-img" src="./icons/upload.svg" alt="" />
+        <img class="all-list-img" src="./icons/all-list.svg" alt="" />
+        <img class="add-task-img" src="./icons/add-task.svg" alt="" />
       </div>
     </header>
 
@@ -111,7 +111,6 @@
       </div>
     </nav>
     <main>
-
       <div class="main-header-container">
         <p class="active-list-name">Reminders</p>
         <p class="active-list-tasks">0</p>
@@ -123,7 +122,6 @@
         <p>&middot;</p>
         <p class="clear-completed">Clear</p>
       </div>
-
 
       <div class="task-container">
         <div class="tasks">
@@ -137,7 +135,7 @@
             </div>
           </div>
         </div>
-                <div class="tasks">
+        <div class="tasks">
           <input type="checkbox" class="is-completed" />
           <div class="task-info">
             <div class="task-name">Task Name</div>
@@ -148,7 +146,7 @@
             </div>
           </div>
         </div>
-                <div class="tasks">
+        <div class="tasks">
           <input type="checkbox" class="is-completed" />
           <div class="task-info">
             <div class="task-name">Task Name</div>
@@ -159,7 +157,7 @@
             </div>
           </div>
         </div>
-                <div class="tasks">
+        <div class="tasks">
           <input type="checkbox" class="is-completed" />
           <div class="task-info">
             <div class="task-name">Task Name</div>
@@ -170,7 +168,7 @@
             </div>
           </div>
         </div>
-                <div class="tasks">
+        <div class="tasks">
           <input type="checkbox" class="is-completed" />
           <div class="task-info">
             <div class="task-name">Task Name</div>
@@ -181,12 +179,39 @@
             </div>
           </div>
         </div>
-        
       </div>
     </main>
 
     <div class="add-task-popup">
-      
+      <div class="popup-content">
+        <img src="./icons/close.svg" alt="">
+        <div>
+          <p>Name</p>
+          <input type="text" placeholder="Task's Name" />
+        </div>
+        <div>
+          <p>Tags</p>
+          <input type="tags" placeholder="Tags" />
+        </div>
+        <div>
+          <p>Note</p>
+          <input type="text" placeholder="Extra Note" />
+        </div>
+        <div>
+          <p>Reminder Date</p>
+          <input type="date"/>
+        </div>
+        <div>
+          <p>List</p>
+          <select name="" id="">
+            <option value="">Main</option>
+            <option value="">Reminders</option>
+            <option value="">Homework</option>
+            <option value="">Emergancy</option>
+            <option value="">Todo List</option>
+          </select>
+        </div>
+      </div>
     </div>
   </body>
 </html>

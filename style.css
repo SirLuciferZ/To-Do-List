@@ -455,3 +455,84 @@ main {
     display: flex;
     column-gap: 20px;
 }
+
+
+
+/*      pop-up for add task          */
+
+
+.add-task-popup{
+    position: absolute;
+    z-index: 1000;
+    background-color: rgb(0, 255, 191);
+    width: 40%;
+    max-width: 600px;
+    height: 60%;
+    max-height: 750px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    opacity: 1;
+}
+
+.popup-content{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.popup-content img{
+    width: 40px;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.popup-content div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.popup-content p{
+    font-size: 20px;
+    font-weight: 600;
+    color: #555;
+}
+
+.popup-content input{
+    width: 80%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.popup-content input::placeholder{
+    font-size: large;
+}
+
+.popup-content select{
+    width: 87%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+.popup-content input:focus{
+    outline: none;
+    border: none;
+}
+
