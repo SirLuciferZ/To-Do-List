@@ -43,6 +43,7 @@ TODO: idk
 ? due date
 ? create date
 ? reminder date
+? list name
 
 
 ! delete task by click on delete button
@@ -58,3 +59,4 @@ TODO: idk
 ? create date
 ? reminder date
 ? color
+? change list

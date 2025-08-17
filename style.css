@@ -56,7 +56,7 @@ header {
 .side-box {
     background-color: rgb(231, 231, 231);
     position: fixed;
-    min-width: 450px;
+    max-width: 450px;
     min-height: 100vh;
     top: 0;
     padding-top: 60px;
@@ -64,14 +64,15 @@ header {
 }
 
 
-.search{
+.search {
     margin-top: 40px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     padding: 0 20px;
 }
-.search input{
+
+.search input {
     flex: 1;
     height: 40px;
     padding-left: 5px;
@@ -79,14 +80,22 @@ header {
     border: none;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    font-size: 18px;
+
+}
+.search input:focus{
+    border: none;
+    box-shadow: none;
+    outline: none;
 }
 
-.search input::placeholder{
+.search input::placeholder {
     font-size: 20px;
     align-self: center;
     font-weight: 600;
 }
-.search img{
+
+.search img {
     background-color: rgb(210, 210, 210);
     width: 30px;
     height: 40px;
@@ -96,15 +105,11 @@ header {
 }
 
 
-
-.calender {}
-
 .tasks-status {
     display: grid;
     grid-template-columns: 200px 200px;
     align-items: center;
     padding: 20px 10px;
-    border-bottom: 1px solid black;
     font-size: 20px;
     row-gap: 10px;
     column-gap: 15px;
@@ -191,4 +196,130 @@ header {
 
 .show-all img {
     background-color: purple;
+}
+
+
+.progress-text-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.progress-bar-container {
+    width: 90%;
+    height: 15px;
+    background-color: rgb(210, 210, 210);
+    /* same color as search */
+    border-radius: 10px;
+    overflow: hidden;
+    /* keeps bar inside rounded corners */
+    margin-top: 5px;
+    /* space from search box */
+    justify-self: center;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #574caf;
+    /* green bar */
+    width: 50%;
+    /* start empty, update with inline style or JS */
+    transition: width 0.3s ease;
+    /* smooth animation */
+}
+
+
+.list-head {
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: rgb(107, 107, 107);
+}
+
+.list-container {
+    height: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    overflow: auto;
+}
+
+.lists {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    transition: 0.15s linear;
+}
+
+.lists:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 3px black;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+
+}
+
+.lists img {
+    width: 40px;
+    background-color: red;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+.list-name {
+    font-size: 25px;
+    font-weight: 600;
+    margin-right: auto;
+}
+
+.list-quantity {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.tag-container {
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    overflow: auto;
+}
+
+.tags-head {
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: rgb(107, 107, 107);
+}
+
+.tag{
+    display: flex;
+    column-gap: 15px;
+    flex-wrap: wrap;
+    row-gap: 15px;
+}
+.tag p{
+    /* border: 1px solid black; */
+    box-shadow: 0 0 3px black;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transition: 0.15s;
+
+}
+
+.tag p:hover{
+    transform: scale(1.05);
+    cursor: pointer;
 }
