@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
 /* Header */
@@ -62,6 +62,40 @@ header {
     padding-top: 60px;
     box-shadow: 0 0 5px black inset;
 }
+
+
+.search{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+.search input{
+    flex: 1;
+    height: 40px;
+    padding-left: 5px;
+    background-color: rgb(210, 210, 210);
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.search input::placeholder{
+    font-size: 20px;
+    align-self: center;
+    font-weight: 600;
+}
+.search img{
+    background-color: rgb(210, 210, 210);
+    width: 30px;
+    height: 40px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding-left: 0.5em;
+}
+
+
 
 .calender {}
 
@@ -135,7 +169,7 @@ header {
     top: 15px;
     right: 30px;
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
     color: rgb(73, 73, 73);
 }
 
