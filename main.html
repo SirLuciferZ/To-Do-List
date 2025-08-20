@@ -184,25 +184,22 @@
 
     <div class="add-task-popup">
       <div class="popup-content">
-        <img src="./icons/close.svg" alt="">
-        <div>
-          <p>Name</p>
-          <input type="text" placeholder="Task's Name" />
+        <div class="circle-popup">
+          <img src="./icons/close.svg" alt="" />
+          <div class="task-name-holder">
+            <input type="text" placeholder="New Task" />
+          </div>
         </div>
-        <div>
-          <p>Tags</p>
-          <input type="tags" placeholder="Tags" />
+        <div class="task-tag-holder">
+          <input type="text" placeholder="Tags" />
         </div>
-        <div>
-          <p>Note</p>
+        <div class="task-note-holder">
           <input type="text" placeholder="Extra Note" />
         </div>
-        <div>
-          <p>Reminder Date</p>
-          <input type="date"/>
+        <div class="task-date-holder">
+          <input type="date" />
         </div>
-        <div>
-          <p>List</p>
+        <div class="task-list-holder">
           <select name="" id="">
             <option value="">Main</option>
             <option value="">Reminders</option>
@@ -210,6 +207,10 @@
             <option value="">Emergancy</option>
             <option value="">Todo List</option>
           </select>
+          <div class="important-check">
+            <label for="important">Important</label>
+            <input type="checkbox" id="important">
+          </div>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
 /* Header */
 
 header {
-   
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,14 +30,16 @@ header {
     width: 60px;
 
 }
-.button-header-container{
+
+.button-header-container {
     display: flex;
     flex: 1;
     justify-content: right;
     padding-right: 50px;
     column-gap: 20px;
 }
-.button-header-container img{
+
+.button-header-container img {
     width: 30px;
     cursor: pointer;
 }
@@ -359,7 +361,7 @@ main {
 }
 
 
-.main-header-container{
+.main-header-container {
     display: flex;
     justify-content: space-between;
     padding: 0 30px;
@@ -371,7 +373,7 @@ main {
     margin-top: 20px;
 }
 
-.complete-clear{
+.complete-clear {
     display: flex;
     margin-left: 20px;
     column-gap: 5px;
@@ -382,7 +384,7 @@ main {
     font-weight: 500;
 }
 
-.clear-completed{
+.clear-completed {
     color: rgb(0, 98, 255);
     cursor: pointer;
 }
@@ -435,23 +437,26 @@ main {
     border-radius: 50%;
 }
 
-.task-info{
+.task-info {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     width: 100%;
     padding-bottom: 10px;
     font-weight: 500;
 }
 
-.task-tags{
+.task-tags {
     color: rgb(57, 123, 255);
 }
-.task-name{
+
+.task-name {
     font-weight: 700;
 }
-.task-note{
+
+.task-note {
     color: #555;
 }
-.tag-date{
+
+.tag-date {
     display: flex;
     column-gap: 20px;
 }
@@ -461,10 +466,10 @@ main {
 /*      pop-up for add task          */
 
 
-.add-task-popup{
+.add-task-popup {
     position: absolute;
     z-index: 1000;
-    background-color: rgb(0, 255, 191);
+    background-color: rgb(229, 229, 229);
     width: 40%;
     max-width: 600px;
     height: 60%;
@@ -476,36 +481,44 @@ main {
     opacity: 1;
 }
 
-.popup-content{
+.popup-content {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 30px;
 }
 
-.popup-content img{
+.circle-popup img {
+    position: absolute;
     width: 40px;
-    margin-left: auto;
-    margin-right: 20px;
-    margin-top: 20px;
+    top: 30px;
+    right: 40px;
     cursor: pointer;
 }
 
-.popup-content div{
+.task-name-holder ,
+.task-date-holder ,
+.task-note-holder ,
+.task-tag-holder  {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 10px;
 }
 
-.popup-content p{
+.task-name-holder p,
+.task-date-holder p,
+.task-note-holder p,
+.task-tag-holder p {
     font-size: 20px;
     font-weight: 600;
     color: #555;
 }
 
-.popup-content input{
+.task-name-holder input,
+.task-date-holder input,
+.task-note-holder input,
+.task-tag-holder input {
     width: 80%;
     padding: 15px;
     border: none;
@@ -513,13 +526,14 @@ main {
     font-size: 17px;
     font-weight: 500;
     text-align: center;
+    background-color: #cbcbcb;
 }
 
-.popup-content input::placeholder{
+.popup-content input::placeholder {
     font-size: large;
 }
 
-.popup-content select{
+.task-list-holder select {
     width: 87%;
     padding: 10px;
     border: none;
@@ -530,9 +544,33 @@ main {
     text-align: center;
 }
 
+.circle-popup {
+    background-color: rgb(14, 69, 210);
+    padding-bottom: 60px;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
 
-.popup-content input:focus{
+.circle-popup input {
+    margin-top: 70px;
+    width: 80%;
+    background-color: rgb(14, 69, 210);
+    font-size: 30px;
+    color: rgb(225, 225, 225);
+}
+
+.circle-popup input::placeholder {
+    font-size: 30px;
+    color: rgb(226, 226, 226);
+}
+
+
+.popup-content input:focus {
     outline: none;
     border: none;
 }
 
+.important-check {
+    width: 100%;
+    display: flex;
+}
