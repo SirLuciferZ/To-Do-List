@@ -26,6 +26,32 @@ function showAddTask() {
     }
 }
 
-document.querySelector(".add-task-img").addEventListener("click", showAddTask)
-document.querySelector(".close-popup").addEventListener("click", showAddTask)
-document.querySelector(".backdrop").addEventListener("click", showAddTask)
+
+document
+    .querySelectorAll(".add-task-img, .close-popup, .backdrop")
+    .forEach(el => el.addEventListener("click", showAddTask));
+
+
+function addTask() {
+    const taskName = document.querySelector(".task-name-holder input").value
+    const taskTag = document.querySelector(".task-tag-holder input").value
+    const taskNote = document.querySelector(".task-note-holder input").value
+    const taskDate = document.querySelector(".task-date-holder input").value
+    const taskList = document.querySelector(".task-list-holder select").value
+    const taskImportance = document.querySelector(".important-check input").checked
+
+
+    if (taskName) {
+        tasks.push({
+            name: taskName || "",
+            tag: taskTag || "",
+            note: taskNote || "",
+            date: taskDate || "",
+            list: taskList || "",
+            importance: taskImportance || false
+        })
+    }
+    console.log(tasks);
+}
+
+document.querySelector(".add-task-button").addEventListener("click", addTask)
