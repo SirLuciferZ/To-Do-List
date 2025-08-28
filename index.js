@@ -4,6 +4,10 @@ if (!tasks) {
     tasks = []
 }
 
+renderTasks()
+
+//      Make popup window visible
+
 function showAddTask() {
     const popup = document.querySelector(".add-task-popup")
     const backdrop = document.querySelector(".backdrop")
@@ -32,6 +36,10 @@ document
     .forEach(el => el.addEventListener("click", showAddTask));
 
 
+
+
+//  Gather the inputs from popup and push it in tasks
+
 function addTask() {
     const taskName = document.querySelector(".task-name-holder input").value
     const taskTag = document.querySelector(".task-tag-holder input").value
@@ -52,6 +60,33 @@ function addTask() {
         })
     }
     console.log(tasks);
+    renderTasks()
 }
 
 document.querySelector(".add-task-button").addEventListener("click", addTask)
+
+
+//  Show the tasks in the task list
+
+function renderTasks() {
+    let tasksRenderedHtml = ''
+    tasks.forEach(task => {
+        const tasksHtml = `<div class="tasks">
+          <input type="checkbox" class="is-completed" />
+          <div class="task-info">
+            <div class="task-name">${task.name}</div>
+            <div class="task-note">${task.note}</div>
+            <div class="tag-date">
+              <div class="task-date">${(task.date).replaceAll("-", "/")}</div>
+              <div class="task-tags">${task.tag}</div>
+            </div>
+          </div>
+        </div>`
+
+        tasksRenderedHtml += tasksHtml;
+        document.querySelector(".task-container").innerHTML = tasksRenderedHtml
+    })
+
+
+
+}
