@@ -470,9 +470,8 @@ main {
     position: fixed;
     z-index: 1000;
     background-color: rgb(229, 229, 229);
-    width: 40%;
-    max-width: 600px;
-    height: 60%;
+    width: 550px;
+    height: 750px;
     max-height: 750px;
     top: 40%;
     left: 50%;
@@ -511,14 +510,16 @@ main {
     cursor: pointer;
 }
 
-.task-name-holder ,
-.task-date-holder ,
-.task-note-holder ,
-.task-tag-holder  {
+.task-name-holder,
+.task-date-holder,
+.task-note-holder,
+.task-tag-holder,
+.task-list-holder {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .task-name-holder p,
@@ -544,8 +545,31 @@ main {
     background-color: #cbcbcb;
 }
 
+.task-tag-holder::after {
+    content: "#";
+    position: absolute;
+    top: 12px;
+    right: 55px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.task-note-holder::after {
+    content: url(./icons/note.svg);
+    position: absolute;
+    top: 12px;
+    right: 50px;
+
+}
+
+
+
 .popup-content input::placeholder {
     font-size: large;
+}
+
+.task-list-holder {
+    position: relative;
 }
 
 .task-list-holder select {
@@ -558,14 +582,25 @@ main {
     font-weight: 500;
     text-align: center;
     appearance: none;
+    background-color: #cbcbcb;
 }
-.task-list-holder select::after{
+
+.task-list-holder select::after {
     content: "\25BC";
     position: absolute;
     top: 0;
     right: 0;
     color: black;
 }
+
+.task-list-holder::after {
+    content: url(./icons/arrow-down.svg);
+    position: absolute;
+    z-index: 10000;
+    top: 12px;
+    right: 50px;
+}
+
 
 
 .circle-popup {
@@ -595,6 +630,74 @@ main {
 }
 
 .important-check {
-    width: 100%;
+    width: 87.5%;
     display: flex;
+    border-radius: 10px;
+    margin-left: 32px;
+    justify-content: center;
+    align-items: center;
+    background-color: #cbcbcb;
+    justify-self: center;
+}
+
+.important-check label {
+    font-size: 17px;
+    font-weight: 600;
+    margin-right: 40px;
+
+}
+
+.important-check input {
+
+    appearance: none;
+    margin-bottom: 10px;
+    /* Remove default OS checkbox */
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    /* Makes it a circle */
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: 0.15s;
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+.important-check input:checked {
+    background-color: #654caf;
+    /* Fill color */
+}
+
+.important-check input:checked::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+}
+
+.add-task-button {
+    width: 300px;
+    padding: 20px 10px;
+    font-size: 19px;
+    border-radius: 50px;
+    background-color: rgb(14, 69, 210);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 100px;
+    margin-bottom: 20px;
+    border: none;
+    transition: 0.15s;
+}
+
+.add-task-button:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 5px rgb(0, 0, 0);
 }
