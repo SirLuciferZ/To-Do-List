@@ -71,31 +71,12 @@
             <p class="list-head">My Lists</p>
             <p class="add-list">Add List</p>
           </div>
-          <div class="lists">
-            <img src="./icons/list.svg" alt="" />
-            <p class="list-name">main</p>
-            <span class="list-quantity">0</span>
+          <div class="new-list-container">
+            <img src="./icons/list.svg" alt="" class="list-icon" />
+            <input class="new-list-name" type="text" placeholder="List Name" />
+            <img src="./icons/add-list.svg" alt="" class="add-list-button" />
           </div>
-          <div class="lists">
-            <img src="./icons/list.svg" alt="" />
-            <p class="list-name">reminders</p>
-            <span class="list-quantity">0</span>
-          </div>
-          <div class="lists">
-            <img src="./icons/list.svg" alt="" />
-            <p class="list-name">homework</p>
-            <span class="list-quantity">0</span>
-          </div>
-          <div class="lists">
-            <img src="./icons/list.svg" alt="" />
-            <p class="list-name">emergancy</p>
-            <span class="list-quantity">0</span>
-          </div>
-          <div class="lists">
-            <img src="./icons/list.svg" alt="" />
-            <p class="list-name">todo list</p>
-            <span class="list-quantity">0</span>
-          </div>
+          <div class="list-items"></div>
         </div>
 
         <div class="tag-container">
@@ -121,10 +102,11 @@
         <p>Completed</p>
         <p>&middot;</p>
         <p class="clear-completed">Clear</p>
+        <p class="delete-list clear-completed">Delete List</p>
       </div>
 
       <div class="task-container">
-        <div class="tasks">
+        <!-- <div class="tasks">
           <input type="checkbox" class="is-completed" />
           <div class="task-info">
             <div class="task-name">Task Name</div>
@@ -178,7 +160,7 @@
               <div class="task-tags"># home</div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </main>
 
@@ -200,7 +182,7 @@
           <input type="date" />
         </div>
         <div class="task-list-holder">
-          <select name="" id="">
+          <select name="" id="list-options">
             <option value="main">Main</option>
             <option value="reminders" selected>Reminders</option>
             <option value="homework">Homework</option>

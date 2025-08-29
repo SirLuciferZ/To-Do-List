@@ -1,7 +1,11 @@
-const tasks = []
+let tasks = JSON.parse(localStorage.getItem("tasks"))
+let lists = JSON.parse(localStorage.getItem("lists"))
 
 if (!tasks) {
     tasks = []
+}
+if (!lists) {
+    lists = []
 }
 
 renderTasks()
@@ -61,6 +65,7 @@ function addTask() {
     }
     console.log(tasks);
     renderTasks()
+    saveToStorage()
 }
 
 document.querySelector(".add-task-button").addEventListener("click", addTask)
@@ -89,4 +94,63 @@ function renderTasks() {
 
 
 
+}
+
+
+
+//      add a new list
+
+
+function showAddList() {
+    const newList = document.querySelector(".new-list-container")
+
+    if (newList.classList.contains("active")) {
+        newList.style.display = "none"
+        newList.classList.remove("active")
+    }
+    else {
+        newList.style.display = "flex"
+        newList.classList.add("active")
+    }
+}
+
+document.querySelector(".list-header-container").addEventListener("click", showAddList)
+
+function addList() {
+    const list = document.querySelector(".new-list-name").value
+    lists.push(list)
+    saveToStorage()
+    showAddList()
+    renderLists()
+    console.log(lists)
+}
+
+document.querySelector(".add-list-button").addEventListener("click", addList)
+
+
+function renderLists() {
+    const listsHtml = lists.map((list) => {
+        return `<div class="lists">
+            <img src="./icons/list.svg" alt="" />
+            <p class="list-name list-class-${list}">${list}</p>
+            <span class="list-quantity">0</span>
+          </div>`
+    }).join("")
+    document.querySelector(".list-items").innerHTML = listsHtml
+
+
+    const popupLists = lists.map((list) => {
+        return `<option value="${list}">${list}</option>`
+    }).join("")
+    document.querySelector("#list-options").innerHTML = popupLists
+}
+renderLists()
+
+
+
+
+
+function saveToStorage() {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+    localStorage.setItem("lists", JSON.stringify(lists));
 }

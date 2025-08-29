@@ -236,6 +236,8 @@ header {
     font-size: 20px;
     font-weight: 600;
     color: rgb(107, 107, 107);
+    position: relative;
+    padding: 10px 20px 0 20px;
 }
 
 .add-list {
@@ -244,6 +246,7 @@ header {
     margin-left: auto;
     display: flex;
     align-items: center;
+    transition: 0.15s;
 }
 
 .add-list::before {
@@ -268,11 +271,21 @@ header {
 
 .list-container {
     height: 400px;
-    padding: 20px;
+
     display: flex;
     flex-direction: column;
     row-gap: 15px;
     overflow: auto;
+}
+
+.list-items {
+    padding: 5px 20px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .lists {
@@ -280,10 +293,11 @@ header {
     display: flex;
     justify-content: space-between;
     transition: 0.15s linear;
+    overflow-x: hidden;
 }
 
 .lists:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
     box-shadow: 0 0 3px black;
     cursor: pointer;
     border-radius: 10px;
@@ -305,6 +319,39 @@ header {
     font-weight: 600;
     margin-right: auto;
 }
+
+.new-list-name {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    width: 290px;
+    margin-right: 10px;
+}
+
+.list-icon {
+    width: 30px;
+    background-color: red;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 15px;
+    height: 30px;
+}
+
+.add-list-button {
+    width: 40px;
+    height: 40px;
+    padding-left: 0px;
+}
+
+.new-list-container {
+    display: none;
+    align-items: center;
+    transition: all 0.15s;
+    padding: 0 20px;
+}
+
 
 .list-quantity {
     font-size: 30px;
@@ -387,8 +434,18 @@ main {
 .clear-completed {
     color: rgb(0, 98, 255);
     cursor: pointer;
+    transition: all 0.15s;
 }
 
+.clear-completed:hover {
+    transform: scale(1.05);
+    color: #f80000;
+}
+
+.delete-list{
+    margin-left: auto;
+    margin-right: 20px;
+}
 
 .task-container {
     display: flex;
