@@ -452,7 +452,38 @@ main {
 .task-container {
     display: flex;
     flex-direction: column;
+    
 }
+
+.empty-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+}
+
+.empty-list img{
+    width: 300px;
+    height: auto;
+}
+
+.list-notice{
+    font-size: 40px;
+    font-weight: 500;
+    font-family: "Bungee", sans-serif;
+}
+
+.list-guide {
+    font-size: 25px;
+    color: #555;
+    font-weight: 600;
+}
+.list-guide span {
+    color: #2500f8;
+    font-size: 30px;
+}
+
 
 .tasks {
     display: flex;

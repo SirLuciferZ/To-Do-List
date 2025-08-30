@@ -175,22 +175,18 @@ function renderTaskByList(event) {
     if (matchingTasks.length > 0) {
         console.log(`Found ${matchingTasks.length} tasks for "${listContent}":`);
         matchingTasks.forEach(task => listedTasks.push(task));
+        renderTasks(listedTasks);
     } else {
         console.log(`No tasks found for "${listContent}"`);
-        listedTasks = [{
-            name: "Empty List",
-            tag: "",
-            note: "You Can Add Task By Clicking The + Button On Top",
-            date: "",
-            list: "",
-            importance: false
-        }];
+        document.querySelector(".task-container").innerHTML = `        <div class="empty-list">
+          <img src="./empty-cart.gif" alt="" />
+          <p class="list-notice">LIST IS EMPTY</p>
+          <p class="list-guide">
+            Click on the <span>+</span> botton on top to add a new task
+          </p>
+        </div>`
     }
-
     console.log(listedTasks);
-
-    renderTasks(listedTasks);
-
 }
 
 document.querySelectorAll(".lists").forEach((list) => {
