@@ -7,8 +7,8 @@ if (!tasks) {
 if (!lists) {
     lists = []
 }
-
-renderTasks()
+renderLists()
+renderTasks(tasks)
 
 //      Make popup window visible
 
@@ -60,22 +60,25 @@ function addTask() {
             note: taskNote || "",
             date: taskDate || "",
             list: taskList || "",
-            importance: taskImportance || false
+            importance: taskImportance || false,
+            isCompleted: false
         })
     }
     console.log(tasks);
-    renderTasks()
+    renderTasks(tasks)
     saveToStorage()
 }
 
 document.querySelector(".add-task-button").addEventListener("click", addTask)
 
+console.log(tasks);
 
-//  Show the tasks in the task list
 
-function renderTasks() {
+//  Show the tasks in the task list  (Only for all section)
+
+function renderTasks(render) {
     let tasksRenderedHtml = ''
-    tasks.forEach(task => {
+    render.forEach(task => {
         const tasksHtml = `<div class="tasks">
           <input type="checkbox" class="is-completed" />
           <div class="task-info">
@@ -91,14 +94,11 @@ function renderTasks() {
         tasksRenderedHtml += tasksHtml;
         document.querySelector(".task-container").innerHTML = tasksRenderedHtml
     })
-
-
-
 }
 
 
 
-//      add a new list
+//      show add list input
 
 
 function showAddList() {
@@ -116,6 +116,8 @@ function showAddList() {
 
 document.querySelector(".list-header-container").addEventListener("click", showAddList)
 
+//      add a new list to lists
+
 function addList() {
     const list = document.querySelector(".new-list-name").value
     lists.push(list)
@@ -128,13 +130,15 @@ function addList() {
 document.querySelector(".add-list-button").addEventListener("click", addList)
 
 
+//      render lists on screen
+
 function renderLists() {
     const listsHtml = lists.map((list) => {
-        return `<div class="lists">
-            <img src="./icons/list.svg" alt="" />
-            <p class="list-name list-class-${list}">${list}</p>
-            <span class="list-quantity">0</span>
-          </div>`
+        return `<div class="lists" data-list="${list}">
+            <img src="./icons/list.svg" alt="" data-list="${list}"  />
+            <p class="list-name list-class-${list}" data-list="${list}">${list}</p>
+            <span class="list-quantity" data-list="${list}">0</span>
+          </div>`;
     }).join("")
     document.querySelector(".list-items").innerHTML = listsHtml
 
@@ -144,11 +148,59 @@ function renderLists() {
     }).join("")
     document.querySelector("#list-options").innerHTML = popupLists
 }
-renderLists()
+
+
+//      Capitalize the first letter of the word
+
+function capitalizeFirstLetter(str) {
+    if (!str) return ""; // handle empty strings
+    try {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    } catch (error) {
+        console.error("Error:", error);
+        return str; // return the original string if an error occurs
+    }
+}
+
+
+//      show tasks related to selected list
+
+
+function renderTaskByList(event) {
+    const listContent = event.target.dataset.list
+    const matchingTasks = tasks.filter(task => task.list === listContent);
+    document.querySelector(".active-list-name").innerHTML = capitalizeFirstLetter(listContent)
+    let listedTasks = []
+
+    if (matchingTasks.length > 0) {
+        console.log(`Found ${matchingTasks.length} tasks for "${listContent}":`);
+        matchingTasks.forEach(task => listedTasks.push(task));
+    } else {
+        console.log(`No tasks found for "${listContent}"`);
+        listedTasks = [{
+            name: "Empty List",
+            tag: "",
+            note: "You Can Add Task By Clicking The + Button On Top",
+            date: "",
+            list: "",
+            importance: false
+        }];
+    }
+
+    console.log(listedTasks);
+
+    renderTasks(listedTasks);
+
+}
+
+document.querySelectorAll(".lists").forEach((list) => {
+    list.addEventListener("click", event => { renderTaskByList(event); })
+})
 
 
 
 
+//      save lists and tasks to local storage
 
 function saveToStorage() {
     localStorage.setItem("tasks", JSON.stringify(tasks))
