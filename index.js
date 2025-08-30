@@ -201,24 +201,29 @@ function capitalizeFirstLetter(str) {
 }
 
 
+//          filter tasks from completed tasks
+
+function filterTasks(baseFilterFn, sectionName) {
+    let result = tasks.filter(baseFilterFn);
+
+    // Hide completed unless section is All or Completed
+    if (sectionName !== "All" && sectionName !== "Completed") {
+        result = result.filter(task => !task.isCompleted);
+    }
+
+    return result;
+}
+
+
+
 //      show tasks related to selected list
 
 
 function renderTaskByList(event) {
-    const listContent = event.target.dataset.list
-    const matchingTasks = tasks.filter(task => task.list === listContent);
-    document.querySelector(".active-list-name").innerHTML = capitalizeFirstLetter(listContent)
-    let listedTasks = []
-
-    if (matchingTasks.length > 0) {
-        console.log(`Found ${matchingTasks.length} tasks for "${listContent}":`);
-        matchingTasks.forEach(task => listedTasks.push(task));
-        renderTasks(listedTasks);
-    } else {
-        console.log(`No tasks found for "${listContent}"`);
-        renderTasks(listedTasks);
-    }
-    console.log(listedTasks);
+    const listContent = event.target.dataset.list;
+    const filtered = filterTasks(task => task.list === listContent, listContent);
+    document.querySelector(".active-list-name").innerHTML = capitalizeFirstLetter(listContent);
+    renderTasks(filtered);
 }
 
 document.querySelectorAll(".lists").forEach((list) => {
@@ -230,10 +235,9 @@ document.querySelectorAll(".lists").forEach((list) => {
 
 
 function showSelectedSectionTasks(filterFn, name) {
-
-    let allTasks = tasks.filter(filterFn);
-    document.querySelector(".active-list-name").innerHTML = `${name} Tasks`
-    renderTasks(allTasks)
+    const filtered = filterTasks(filterFn, name);
+    document.querySelector(".active-list-name").innerHTML = `${name} Tasks`;
+    renderTasks(filtered);
 }
 
 document.querySelector(".show-important").addEventListener("click", () => showSelectedSectionTasks(task => task.importance, "Important"))
