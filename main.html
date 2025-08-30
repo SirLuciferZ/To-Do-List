@@ -112,7 +112,6 @@
       </div>
 
       <div class="task-container">
-
         <!-- <div class="tasks">
           <input type="checkbox" class="is-completed" />
           <div class="task-info">
@@ -206,6 +205,41 @@
     </div>
 
     <div class="backdrop"></div>
+
+    <div class="task-details-popup">
+      <div class="popup-content">
+
+        <!-- View Mode -->
+        <div class="details-view">
+          <h2 class="details-name"></h2>
+          <p><strong>Note:</strong> <span class="details-note"></span></p>
+          <p><strong>Date:</strong> <span class="details-date"></span></p>
+          <p><strong>Tag:</strong> <span class="details-tag"></span></p>
+          <p><strong>List:</strong> <span class="details-list"></span></p>
+          <p>
+            <strong>Important:</strong> <span class="details-importance"></span>
+          </p>
+          <p>
+            <strong>Completed:</strong> <span class="details-completed"></span>
+          </p>
+          <img class="edit-task-inside" src="./icons/edit-white.svg">
+        </div>
+
+        <!-- Edit Mode -->
+        <div class="details-edit" style="display: none">
+          <input type="text" class="edit-name" placeholder="Task Name" />
+          <input type="text" class="edit-tag" placeholder="Tags" />
+          <input type="text" class="edit-note" placeholder="Extra Note" />
+          <input type="date" class="edit-date" />
+          <select class="edit-list"></select>
+          <label>
+            <input type="checkbox" class="edit-importance" /> Important
+          </label>
+          <button class="save-task-changes">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="backdrop-task-details"></div>
 
     <script src="./index.js"></script>
   </body>

@@ -10,7 +10,11 @@ if (!lists) {
     lists = []
 }
 renderLists()
-renderTasks(tasks)
+
+window.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".active-list-name").textContent = "All";
+    renderTasks(tasks);
+});
 
 //      Make popup window visible
 
@@ -54,34 +58,51 @@ function generateId() {
 //  Gather the inputs from popup and push it in tasks
 
 function addTask() {
-    const taskName = document.querySelector(".task-name-holder input").value
-    const taskTag = document.querySelector(".task-tag-holder input").value
-    const taskNote = document.querySelector(".task-note-holder input").value
-    const taskDate = document.querySelector(".task-date-holder input").value
-    const taskList = document.querySelector(".task-list-holder select").value
-    const taskImportance = document.querySelector(".important-check input").checked
+    const taskName = document.querySelector(".task-name-holder input").value;
+    const taskTag = document.querySelector(".task-tag-holder input").value;
+    const taskNote = document.querySelector(".task-note-holder input").value;
+    const taskDate = document.querySelector(".task-date-holder input").value;
+    const taskList = document.querySelector(".task-list-holder select").value;
+    const taskImportance = document.querySelector(".important-check input").checked;
 
+    if (!taskName) return;
 
-    if (taskName) {
+    if (isEditing) {
+        // Update existing task
+        const task = tasks.find(t => t.id === editingTaskId);
+        if (task) {
+            task.name = taskName;
+            task.tag = taskTag;
+            task.note = taskNote;
+            task.date = taskDate;
+            task.list = taskList;
+            task.importance = taskImportance;
+        }
+        isEditing = false;
+        editingTaskId = null;
+        document.querySelector(".add-task-button").textContent = "Add Task";
+    } else {
+        // Add new task
         tasks.push({
             id: generateId(),
-            name: taskName || "",
-            tag: taskTag || "",
-            note: taskNote || "",
-            date: taskDate || "",
-            list: taskList || "",
-            importance: taskImportance || false,
+            name: taskName,
+            tag: taskTag,
+            note: taskNote,
+            date: taskDate,
+            list: taskList,
+            importance: taskImportance,
             isCompleted: false
-        })
+        });
     }
-    console.log(tasks);
-    renderTasks(tasks)
-    saveToStorage()
+
+    saveToStorage();
+    renderTasks(tasks);
+    showAddTask(); // close popup
 }
+
 
 document.querySelector(".add-task-button").addEventListener("click", addTask)
 
-console.log(tasks);
 
 
 //  Show the tasks in the task list  (Only for all section)
@@ -107,10 +128,13 @@ function renderTasks(render) {
                         <div class="task-name">${task.name}</div>
                         <div class="task-note">${task.note}</div>
                         <div class="tag-date">
-                            <div class="task-date">${(task.date).replaceAll("-", "/")}</div>
+                            <div class="task-date">${task.date.replaceAll("-", "/")}</div>
                             <div class="task-tags">${task.tag}</div>
                         </div>
+                        
                     </div>
+                    <img class="edit-task" data-id="${task.id
+                }" src="./icons/edit.svg" alt="" />
                 </div>
             `;
         });
@@ -128,11 +152,129 @@ function renderTasks(render) {
         `;
     }
 
-    // Reattach event listeners after rendering
+    // Reattach checkbox listeners
     document.querySelectorAll(".is-completed").forEach(cb => {
         cb.addEventListener("click", isCompletedCheck);
     });
+
+    // Attach edit button listeners
+    document.querySelectorAll(".edit-task").forEach(btn => {
+        btn.addEventListener("click", editTask);
+    });
+
+    // Attach task click listeners
+    document.querySelectorAll(".task-info").forEach(info => {
+        info.addEventListener("click", showTaskDetails);
+    });
+
+
+
+    updateCounts();
 }
+
+
+//          show task details on clicking the task
+
+
+let currentDetailTaskId = null;
+
+function showTaskDetails(event) {
+    const taskId = event.currentTarget.parentElement.querySelector(".is-completed").dataset.id;
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    currentDetailTaskId = taskId;
+
+    // Fill view mode
+    document.querySelector(".details-name").textContent = task.name;
+    document.querySelector(".details-note").textContent = task.note || "—";
+    document.querySelector(".details-date").textContent = task.date ? task.date.replaceAll("-", "/") : "—";
+    document.querySelector(".details-tag").textContent = task.tag || "—";
+    document.querySelector(".details-list").textContent = task.list || "—";
+    document.querySelector(".details-importance").textContent = task.importance ? "Yes" : "No";
+    document.querySelector(".details-completed").textContent = task.isCompleted ? "Yes" : "No";
+
+    // Fill edit mode fields
+    document.querySelector(".edit-name").value = task.name;
+    document.querySelector(".edit-tag").value = task.tag;
+    document.querySelector(".edit-note").value = task.note;
+    document.querySelector(".edit-date").value = task.date;
+    document.querySelector(".edit-list").innerHTML = lists.map(l => `<option value="${l}" ${l === task.list ? "selected" : ""}>${l}</option>`).join("");
+    document.querySelector(".edit-importance").checked = task.importance;
+
+    // Show view mode by default
+    document.querySelector(".details-view").style.display = "block";
+    document.querySelector(".details-edit").style.display = "none";
+
+    document.querySelector(".task-details-popup").classList.add("active");
+    document.querySelector(".backdrop-task-details").classList.add("active");
+}
+
+function closeTaskDetails() {
+    document.querySelector(".task-details-popup").classList.remove("active");
+    document.querySelector(".backdrop-task-details").classList.remove("active");
+}
+
+// Switch to edit mode
+document.querySelector(".edit-task-inside").addEventListener("click", () => {
+    document.querySelector(".details-view").style.display = "none";
+    document.querySelector(".details-edit").style.display = "block";
+});
+
+// Save changes
+document.querySelector(".save-task-changes").addEventListener("click", () => {
+    const task = tasks.find(t => t.id === currentDetailTaskId);
+    if (!task) return;
+
+    task.name = document.querySelector(".edit-name").value;
+    task.tag = document.querySelector(".edit-tag").value;
+    task.note = document.querySelector(".edit-note").value;
+    task.date = document.querySelector(".edit-date").value;
+    task.list = document.querySelector(".edit-list").value;
+    task.importance = document.querySelector(".edit-importance").checked;
+
+    saveToStorage();
+    renderTasks(tasks);
+    closeTaskDetails();
+});
+
+document.querySelector(".backdrop-task-details").addEventListener("click", closeTaskDetails);
+
+
+
+
+
+
+//     Edit a task  
+
+let isEditing = false;
+let editingTaskId = null;
+
+
+function editTask(event) {
+    const taskId = event.target.dataset.id;
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    // Pre-fill popup inputs
+    document.querySelector(".task-name-holder input").value = task.name;
+    document.querySelector(".task-tag-holder input").value = task.tag;
+    document.querySelector(".task-note-holder input").value = task.note;
+    document.querySelector(".task-date-holder input").value = task.date;
+    document.querySelector(".task-list-holder select").value = task.list;
+    document.querySelector(".important-check input").checked = task.importance;
+
+    // Set edit mode
+    isEditing = true;
+    editingTaskId = taskId;
+
+    // Change button text
+    document.querySelector(".add-task-button").textContent = "Save Changes";
+
+    // Show popup
+    showAddTask();
+}
+
 
 
 
@@ -162,10 +304,143 @@ function addList() {
     saveToStorage()
     showAddList()
     renderLists()
-    console.log(lists)
 }
 
 document.querySelector(".add-list-button").addEventListener("click", addList)
+
+
+//              delete a list
+
+function deleteList() {
+    const currentList = document.querySelector(".active-list-name").textContent.trim();
+
+    // Don't allow deleting "All" or special sections
+    if (["All", "Today's", "Important", "Completed", "Active"].includes(currentList)) {
+        alert("You can't delete this section.");
+        return;
+    }
+
+    // Remove list from lists array
+    lists = lists.filter(list => list !== currentList);
+
+    // Remove tasks belonging to that list
+    tasks = tasks.filter(task => task.list !== currentList);
+
+    saveToStorage();
+    renderLists();
+    renderTasks(tasks); // Show all tasks after deletion
+    document.querySelector(".active-list-name").textContent = "All";
+}
+
+document.querySelector(".delete-list").addEventListener("click", deleteList);
+
+//          item count for each list and sections
+
+function updateCounts() {
+    const todayStr = new Date().toISOString().split("T")[0];
+
+    // Sections (excluding completed unless it's the Completed section)
+    const allCount = tasks.filter(t => !t.isCompleted).length;
+    const activeCount = tasks.filter(t => !t.isCompleted).length;
+    const todayCount = tasks.filter(t => t.date === todayStr && !t.isCompleted).length;
+    const importantCount = tasks.filter(t => t.importance && !t.isCompleted).length;
+    const completedCount = tasks.filter(t => t.isCompleted).length;
+
+    document.querySelector(".all-num").textContent = allCount;
+    document.querySelector(".active-num").textContent = activeCount;
+    document.querySelector(".today-num").textContent = todayCount;
+    document.querySelector(".important-num").textContent = importantCount;
+    document.querySelector(".completed-num").textContent = completedCount;
+
+    // Lists (only active tasks)
+    lists.forEach(listName => {
+        const listCount = tasks.filter(t => t.list === listName && !t.isCompleted).length;
+        const listCountEl = document.querySelector(`.list-class-${listName} ~ .list-quantity`);
+        if (listCountEl) {
+            listCountEl.textContent = listCount;
+        }
+    });
+
+    // Active list/section count at the top
+    const currentListName = document.querySelector(".active-list-name").textContent.trim();
+    let currentCount = 0;
+
+    if (currentListName === "All") {
+        currentCount = allCount;
+    } else if (currentListName === "Active") {
+        currentCount = activeCount;
+    } else if (currentListName === "Today's") {
+        currentCount = todayCount;
+    } else if (currentListName === "Important") {
+        currentCount = importantCount;
+    } else if (currentListName === "Completed") {
+        currentCount = completedCount;
+    } else {
+        // Custom list
+        currentCount = tasks.filter(t => t.list === currentListName && !t.isCompleted).length;
+    }
+
+    document.querySelector(".active-list-tasks").textContent = currentCount;
+}
+
+
+//              Update today's progress bar
+
+
+function updateTodayProgress() {
+    const todayStr = new Date().toISOString().split("T")[0];
+
+    const todayTasks = tasks.filter(t => t.date === todayStr);
+    const completed = todayTasks.filter(t => t.isCompleted).length;
+    const total = todayTasks.length;
+
+    // Update the counts in the sidebar
+    const completedEl = document.querySelector(".today-completed-task");
+    const totalEl = document.querySelector(".today-total-task");
+    if (completedEl) completedEl.textContent = completed;
+    if (totalEl) totalEl.textContent = total;
+
+    // Calculate percentage
+    const pct = total ? Math.round((completed / total) * 100) : 0;
+
+    // Update the bar
+    const bar = document.querySelector(".progress-bar");
+    if (!bar) return;
+
+    // Optional color states
+    bar.classList.remove("low", "mid", "high");
+    if (pct >= 67) bar.classList.add("high");
+    else if (pct >= 34) bar.classList.add("mid");
+    else bar.classList.add("low");
+
+    bar.style.width = pct + "%";
+    bar.setAttribute("aria-valuenow", String(pct));
+    bar.setAttribute("aria-label", `Today's progress: ${pct}%`);
+}
+
+window.addEventListener("DOMContentLoaded", updateTodayProgress);
+
+
+//              clear tasks from a list
+
+function clearTasks() {
+    const currentList = document.querySelector(".active-list-name").textContent.trim();
+
+    // If in "All" section, clear ALL tasks
+    if (currentList === "All") {
+        tasks = [];
+    } else {
+        // Remove only tasks in the current list
+        tasks = tasks.filter(task => task.list !== currentList);
+    }
+
+    saveToStorage();
+    renderTasks(tasks);
+}
+
+document.querySelector(".clear-completed").addEventListener("click", clearTasks);
+
+
 
 
 //      render lists on screen
@@ -173,18 +448,24 @@ document.querySelector(".add-list-button").addEventListener("click", addList)
 function renderLists() {
     const listsHtml = lists.map((list) => {
         return `<div class="lists" data-list="${list}">
-            <img src="./icons/list.svg" alt="" data-list="${list}"  />
+            <img src="./icons/list.svg" alt="" data-list="${list}" />
             <p class="list-name list-class-${list}" data-list="${list}">${list}</p>
             <span class="list-quantity" data-list="${list}">0</span>
-          </div>`;
-    }).join("")
-    document.querySelector(".list-items").innerHTML = listsHtml
+        </div>`;
+    }).join("");
 
+    document.querySelector(".list-items").innerHTML = listsHtml;
 
     const popupLists = lists.map((list) => {
-        return `<option value="${list}">${list}</option>`
-    }).join("")
-    document.querySelector("#list-options").innerHTML = popupLists
+        return `<option value="${list}">${list}</option>`;
+    }).join("");
+    document.querySelector("#list-options").innerHTML = popupLists;
+
+    updateCounts(); // ✅ update after rendering lists
+
+    document.querySelectorAll(".lists").forEach((list) => {
+        list.addEventListener("click", event => { renderTaskByList(event); })
+    })
 }
 
 
@@ -221,10 +502,13 @@ function filterTasks(baseFilterFn, sectionName) {
 
 function renderTaskByList(event) {
     const listContent = event.target.dataset.list;
-    const filtered = filterTasks(task => task.list === listContent, listContent);
-    document.querySelector(".active-list-name").innerHTML = capitalizeFirstLetter(listContent);
+    currentFilterFn = task => task.list === listContent;
+    currentViewName = listContent;
+    const filtered = tasks.filter(currentFilterFn);
+    document.querySelector(".active-list-name").textContent = listContent;
     renderTasks(filtered);
 }
+
 
 document.querySelectorAll(".lists").forEach((list) => {
     list.addEventListener("click", event => { renderTaskByList(event); })
@@ -233,12 +517,20 @@ document.querySelectorAll(".lists").forEach((list) => {
 
 //      show the selected section tasks by clicking on each section
 
+let currentFilterFn = () => true; // default: show all
+let currentViewName = "All";
+
+
+
 
 function showSelectedSectionTasks(filterFn, name) {
-    const filtered = filterTasks(filterFn, name);
-    document.querySelector(".active-list-name").innerHTML = `${name} Tasks`;
+    currentFilterFn = filterFn;
+    currentViewName = name;
+    const filtered = tasks.filter(filterFn);
+    document.querySelector(".active-list-name").textContent = name;
     renderTasks(filtered);
 }
+
 
 document.querySelector(".show-important").addEventListener("click", () => showSelectedSectionTasks(task => task.importance, "Important"))
 
@@ -260,6 +552,29 @@ function isToday(task) {
 
 
 
+
+//          search bar tasks
+
+
+document.querySelector(".search input").addEventListener("input", function (e) {
+    const searchTerm = e.target.value.toLowerCase().trim();
+
+    // Start from the current view's filtered tasks
+    let visibleTasks = tasks.filter(currentFilterFn);
+
+    // Apply search filter
+    if (searchTerm) {
+        visibleTasks = visibleTasks.filter(task =>
+            task.name.toLowerCase().includes(searchTerm)
+        );
+    }
+
+    renderTasks(visibleTasks);
+});
+
+
+
+
 //          completed check
 
 function isCompletedCheck(event) {
@@ -269,13 +584,13 @@ function isCompletedCheck(event) {
     const matchingTask = tasks.find(task => task.id === taskId);
     if (matchingTask) {
         matchingTask.isCompleted = checkbox.checked;
-    } else {
-        console.log("yes")
     }
-    saveToStorage()
-    renderTasks(tasks)
-    console.log(tasks)
+
+    saveToStorage();
+    showSelectedSectionTasks(currentFilterFn, currentViewName);
 }
+
+
 
 
 //      save lists and tasks to local storage
@@ -283,4 +598,6 @@ function isCompletedCheck(event) {
 function saveToStorage() {
     localStorage.setItem("tasks", JSON.stringify(tasks))
     localStorage.setItem("lists", JSON.stringify(lists));
+
+    updateTodayProgress();
 }
