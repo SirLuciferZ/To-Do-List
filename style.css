@@ -444,7 +444,7 @@ main {
     color: #f80000;
 }
 
-.delete-list{
+.delete-list {
     margin-left: auto;
     margin-right: 20px;
 }
@@ -452,7 +452,7 @@ main {
 .task-container {
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .empty-list {
@@ -463,12 +463,12 @@ main {
     transition: all 0.5s;
 }
 
-.empty-list img{
+.empty-list img {
     width: 300px;
     height: auto;
 }
 
-.list-notice{
+.list-notice {
     font-size: 40px;
     font-weight: 500;
     font-family: "Bungee", sans-serif;
@@ -479,6 +479,7 @@ main {
     color: #555;
     font-weight: 600;
 }
+
 .list-guide span {
     color: #2500f8;
     font-size: 30px;
@@ -491,6 +492,11 @@ main {
     align-items: center;
     font-size: 18px;
     margin-top: 15px;
+}
+
+.tasks.completed .task-name {
+    color: gray;
+    text-decoration: line-through;
 }
 
 .is-completed {

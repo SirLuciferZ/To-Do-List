@@ -1,3 +1,5 @@
+
+
 let tasks = JSON.parse(localStorage.getItem("tasks"))
 let lists = JSON.parse(localStorage.getItem("lists"))
 
@@ -40,6 +42,13 @@ document
     .forEach(el => el.addEventListener("click", showAddTask));
 
 
+//      Generate a random ID
+
+
+function generateId() {
+    return Math.random().toString(36).substr(2, 9); // e.g. "k3f9z8q1a"
+}
+
 
 
 //  Gather the inputs from popup and push it in tasks
@@ -55,6 +64,7 @@ function addTask() {
 
     if (taskName) {
         tasks.push({
+            id: generateId(),
             name: taskName || "",
             tag: taskTag || "",
             note: taskNote || "",
@@ -77,23 +87,51 @@ console.log(tasks);
 //  Show the tasks in the task list  (Only for all section)
 
 function renderTasks(render) {
-    let tasksRenderedHtml = ''
-    render.forEach(task => {
-        const tasksHtml = `<div class="tasks">
-          <input type="checkbox" class="is-completed" />
-          <div class="task-info">
-            <div class="task-name">${task.name}</div>
-            <div class="task-note">${task.note}</div>
-            <div class="tag-date">
-              <div class="task-date">${(task.date).replaceAll("-", "/")}</div>
-              <div class="task-tags">${task.tag}</div>
-            </div>
-          </div>
-        </div>`
+    // Sort so incomplete tasks come first
+    const sortedTasks = [...render].sort((a, b) => {
+        return a.isCompleted - b.isCompleted;
+        // false (0) before true (1)
+    });
 
-        tasksRenderedHtml += tasksHtml;
-        document.querySelector(".task-container").innerHTML = tasksRenderedHtml
-    })
+    let tasksRenderedHtml = '';
+
+    if (sortedTasks.length > 0) {
+        sortedTasks.forEach(task => {
+            tasksRenderedHtml += `
+                <div class="tasks ${task.isCompleted ? "completed" : ""}">
+                    <input type="checkbox" 
+                        class="is-completed" 
+                        data-id="${task.id}" 
+                        ${task.isCompleted ? "checked" : ""} />
+                    <div class="task-info">
+                        <div class="task-name">${task.name}</div>
+                        <div class="task-note">${task.note}</div>
+                        <div class="tag-date">
+                            <div class="task-date">${(task.date).replaceAll("-", "/")}</div>
+                            <div class="task-tags">${task.tag}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        document.querySelector(".task-container").innerHTML = tasksRenderedHtml;
+    } else {
+        document.querySelector(".task-container").innerHTML = `
+            <div class="empty-list">
+                <img src="./empty-cart.gif" alt="" />
+                <p class="list-notice">LIST IS EMPTY</p>
+                <p class="list-guide">
+                    Click on the <span>+</span> button on top to add a new task
+                </p>
+            </div>
+        `;
+    }
+
+    // Reattach event listeners after rendering
+    document.querySelectorAll(".is-completed").forEach(cb => {
+        cb.addEventListener("click", isCompletedCheck);
+    });
 }
 
 
@@ -178,13 +216,7 @@ function renderTaskByList(event) {
         renderTasks(listedTasks);
     } else {
         console.log(`No tasks found for "${listContent}"`);
-        document.querySelector(".task-container").innerHTML = `        <div class="empty-list">
-          <img src="./empty-cart.gif" alt="" />
-          <p class="list-notice">LIST IS EMPTY</p>
-          <p class="list-guide">
-            Click on the <span>+</span> botton on top to add a new task
-          </p>
-        </div>`
+        renderTasks(listedTasks);
     }
     console.log(listedTasks);
 }
@@ -194,6 +226,52 @@ document.querySelectorAll(".lists").forEach((list) => {
 })
 
 
+//      show the selected section tasks by clicking on each section
+
+
+function showSelectedSectionTasks(filterFn, name) {
+
+    let allTasks = tasks.filter(filterFn);
+    document.querySelector(".active-list-name").innerHTML = `${name} Tasks`
+    renderTasks(allTasks)
+}
+
+document.querySelector(".show-important").addEventListener("click", () => showSelectedSectionTasks(task => task.importance, "Important"))
+
+document.querySelector(".show-all").addEventListener("click", () => showSelectedSectionTasks(() => true, "All"))
+
+document.querySelector(".show-today").addEventListener("click", () => showSelectedSectionTasks(isToday, "Today's"))
+
+document.querySelector(".show-completed").addEventListener("click", () => showSelectedSectionTasks(task => task.isCompleted, "Completed"))
+
+document.querySelector(".show-active").addEventListener("click", () => showSelectedSectionTasks(task => !task.isCompleted, "Active"))
+
+
+// Helper to check if a task is due today
+function isToday(task) {
+    const todayStr = new Date().toISOString().split("T")[0];
+    // e.g. "2025-08-30"
+    return task.date === todayStr;
+}
+
+
+
+//          completed check
+
+function isCompletedCheck(event) {
+    const checkbox = event.target;
+    const taskId = checkbox.dataset.id;
+
+    const matchingTask = tasks.find(task => task.id === taskId);
+    if (matchingTask) {
+        matchingTask.isCompleted = checkbox.checked;
+    } else {
+        console.log("yes")
+    }
+    saveToStorage()
+    renderTasks(tasks)
+    console.log(tasks)
+}
 
 
 //      save lists and tasks to local storage
