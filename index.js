@@ -25,7 +25,7 @@ function showAddTask() {
     if (popup.classList.contains("active")) {
         popup.style.opacity = 0
         popup.style.pointerEvents = "none"
-        popup.style.top = "40%"
+        popup.style.scale = "0"
         popup.classList.remove("active")
         backdrop.style.opacity = 0
         backdrop.style.pointerEvents = "none"
@@ -33,7 +33,7 @@ function showAddTask() {
     else {
         popup.style.opacity = 1
         popup.style.pointerEvents = "all"
-        popup.style.top = "50%"
+        popup.style.scale = "1"
         popup.classList.add("active")
         backdrop.style.opacity = 1
         backdrop.style.pointerEvents = "all"
@@ -589,6 +589,45 @@ function isCompletedCheck(event) {
     saveToStorage();
     showSelectedSectionTasks(currentFilterFn, currentViewName);
 }
+
+
+
+//          delete the selected task
+
+
+
+function deleteTask() {
+    if (!currentDetailTaskId) return;
+
+    if (!confirm("Are you sure you want to delete this task?")) return;
+
+    // Find the task element in the background list
+    const taskEl = document.querySelector(`.is-completed[data-id="${currentDetailTaskId}"]`)?.closest(".tasks");
+
+    if (taskEl) {
+        // Add animation styles
+        taskEl.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+        taskEl.style.opacity = "0";
+        taskEl.style.transform = "translateX(-20px)";
+
+        // Wait for animation to finish before removing
+        setTimeout(() => {
+            tasks = tasks.filter(task => task.id !== currentDetailTaskId);
+            saveToStorage();
+            closeTaskDetails();
+            showSelectedSectionTasks(currentFilterFn, currentViewName);
+        }, 300);
+    } else {
+        // Fallback if element not found
+        tasks = tasks.filter(task => task.id !== currentDetailTaskId);
+        saveToStorage();
+        closeTaskDetails();
+        showSelectedSectionTasks(currentFilterFn, currentViewName);
+    }
+}
+
+document.querySelector(".delete-task-button").addEventListener("click", deleteTask);
+
 
 
 

@@ -44,6 +44,17 @@ header {
     cursor: pointer;
 }
 
+.add-task-img {
+    transition: all 0.3s;
+}
+
+.add-task-img:hover {
+
+    content: url(./icons/add-task-blue.svg);
+    width: 30px;
+    transform: scale(1.1);
+}
+
 
 
 
@@ -579,6 +590,10 @@ main {
     /* Fill color */
 }
 
+.is-completed:hover {
+    box-shadow: 0 0 5px black;
+}
+
 .is-completed:checked::after {
     content: '';
     position: absolute;
@@ -626,11 +641,12 @@ main {
     width: 550px;
     height: 750px;
     max-height: 750px;
-    top: 40%;
+    top: 50%;
     left: 50%;
+    scale: 0;
     transform: translate(-50%, -50%);
     border-radius: 20px;
-    transition: 0.3s ease-in;
+    transition: 0.3s ease-out;
     pointer-events: none;
     opacity: 0;
 }
@@ -932,7 +948,8 @@ main {
     position: relative;
 }
 
-.details-view p {
+.details-view p,
+.details-view p span {
     font-size: 20px;
 }
 
@@ -944,6 +961,25 @@ main {
     right: 0;
     cursor: pointer;
 }
+
+.edit-task-inside:hover {
+    content: url(./icons/edit-hover.svg);
+}
+
+
+.delete-task-button {
+    margin-left: 300px;
+    width: 30px;
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    cursor: pointer;
+}
+
+.delete-task-button:hover {
+    content: url(./icons/delete-red.svg);
+}
+
 
 .details-edit {
     display: flex;
