@@ -13,29 +13,29 @@ TODO: idk
 ? center : todays tasks
 
 
-! a box on the right side of the body
-? a calender
+* a box on the right side of the body
+// a calender
 ? 3 buttons for all , active , completed, important
 ? progress bar for todays tasks
 
 
-! a task list that shows :
+* a task list that shows :
 ? task name
 ? task reminder date / tags / note
 ? a checkbox for completion
 
 
-! Task Check Boxes
+* Task Check Boxes
 ? for completion
-? highlight a task as important
+// highlight a task as important
 
 
-! Task buttons
+* Task buttons
 ? edit task
 ? remove task
 
 
-! by clicking on tasks name
+* by clicking on tasks name
 ? open a detailed task info :
 ? contains :
 ? name
@@ -47,17 +47,18 @@ TODO: idk
 ? list name
 
 
-! delete task by click on delete button
+* delete task by click on delete button
 ? a delete button on right side of the task
 
 
-! by clicking edit button
+* by clicking edit button
 ? a pop-up appear that you can change :
 ? name
 ? tag
-? status
+// status
+? Note
 ? due date
-? create date
-? reminder date
-? color
+// create date
+// reminder date
+// color
 ? change list
