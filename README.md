@@ -56,7 +56,7 @@ A feature-rich, interactive to-do list application that helps you organize your 
 1. **Clone:**
 
    ```bash
-   git clone https://github.com/your-username/To-Do-List.git
+   git clone https://github.com/SirLuciferZ/To-Do-List.git
    cd To-Do-List
    ```
 
@@ -80,6 +80,8 @@ A feature-rich, interactive to-do list application that helps you organize your 
 ---
 
 ## File structure
+
+`UPDATING`
 
 ```bash
 To-Do-List/
@@ -126,7 +128,7 @@ To-Do-List/
     "title": "Buy milk",
     "description": "2% organic",
     "dueDate": "2025-09-01",
-    "priority": "low | medium | high",
+    "importance": false,
     "completed": false,
     "listId": "groceries",
     "tags": ["errands", "quick"],
@@ -175,6 +177,8 @@ To-Do-List/
 
 ## Keyboard shortcuts
 
+`NOT ADDED YET`
+
 - **Add task:** Press `A`
 - **Toggle theme:** Press `T`
 - **Search focus:** Press `/`
@@ -209,7 +213,7 @@ To-Do-List/
 2. **Clone:**
 
    ```bash
-   git clone https://github.com/your-username/To-Do-List.git
+   git clone https://github.com/SirLuciferZ/To-Do-List.git
    cd To-Do-List
    ```
 
@@ -248,7 +252,7 @@ To-Do-List/
 ```bash
 MIT License
 
-Copyright (c) 2025 Your Name
+Copyright (c) 2025 SirLuciferZ
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
