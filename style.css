@@ -20,6 +20,7 @@ body {
     --blue-text: rgb(0, 110, 255);
     --bg-sidebar-sections: rgb(210, 210, 210);
     --bg-sidebar: rgb(231, 231, 231);
+    --border: black;
 }
 
 [data-theme="dark"] {
@@ -29,6 +30,7 @@ body {
     --blue-text: rgb(0, 110, 255);
     --bg-sidebar-sections: #3B5368;
     --bg-sidebar: #2C3E50;
+    --border: #fff;
 }
 
 /* Header */
@@ -141,7 +143,7 @@ header {
     min-height: 100vh;
     top: 0;
     padding-top: 30px;
-    box-shadow: 0 0 5px black inset;
+    box-shadow: 0 0 5px color-mix(in srgb, var(--border) 30%, transparent) inset;
 }
 
 
@@ -417,12 +419,12 @@ header {
     overflow-x: hidden;
     overflow: hidden;
     min-height: 40px;
-    
+
 }
 
 .lists:hover {
     transform: scale(1.01);
-    box-shadow: 0 0 3px black;
+    box-shadow: 0 0 3px var(--border);
     cursor: pointer;
     border-radius: 10px;
     padding: 10px;
@@ -452,7 +454,7 @@ header {
     border-radius: 10px;
     width: 290px;
     margin-right: 10px;
-    
+
 }
 
 .list-icon {
@@ -511,7 +513,7 @@ header {
 
 .tag p {
     /* border: 1px solid black; */
-    box-shadow: 0 0 3px black;
+    box-shadow: 0 0 3px var(--border);
     border-radius: 20px;
     padding: 10px 20px;
     transition: 0.15s;
@@ -560,7 +562,9 @@ main {
     margin-left: 20px;
     column-gap: 5px;
     font-size: 17px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.202);
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 30%, transparent);
+    ;
+
     padding-bottom: 10px;
     color: var(--gray-text);
     font-weight: 500;
@@ -642,7 +646,7 @@ main {
     font-size: 18px;
     margin-top: 15px;
     flex-direction: row;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 30%, transparent);
     padding-bottom: 10px;
 }
 
@@ -675,7 +679,7 @@ main {
 }
 
 .is-completed:hover {
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px var(--border);
 }
 
 .is-completed:checked::after {
@@ -957,7 +961,7 @@ main {
 
 .add-task-button:hover {
     transform: scale(1.01);
-    box-shadow: 0 0 5px rgb(0, 0, 0);
+    box-shadow: 0 0 5px var(--border);
 }
 
 
@@ -973,7 +977,7 @@ main {
     background: var(--bg-sidebar);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px color-mix(in srgb, var(--border) 30%, transparent);
     z-index: 1001;
     width: 400px;
     height: 500px;
@@ -982,7 +986,7 @@ main {
     transition: opacity 0.25s ease, transform 0.25s ease;
     color: var(--text-color);
     line-height: 50px;
-    box-shadow: 0 0 10px rgb(0, 0, 0);
+    /* box-shadow: 0 0 10px rgb(0, 0, 0); */
 
 }
 
@@ -1113,7 +1117,7 @@ main {
 
 .details-edit input[type="text"]::placeholder,
 .details-edit input[type="date"]::placeholder {
-    color: var(--gray-text);
+    color: rgb(147, 147, 147);
 }
 
 .edit-importance {
@@ -1175,10 +1179,10 @@ main {
     color: white;
     font-weight: 600;
     border: none;
-    transition: 0.3s;
+    transition: all 0.3s;
 }
 
 .save-task-changes:hover {
     background-color: #2faf55;
-    box-shadow: 0 0 3px #2faf55;
+    box-shadow: 0 0 10px #2faf55;
 }

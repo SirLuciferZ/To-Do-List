@@ -33,15 +33,9 @@ document.querySelector(".dark-mode-container").addEventListener("click", functio
 function changeTheme() {
     const active = document.querySelector(".dark-mode-container").classList.contains("active");
 
-    // document.querySelector("body").style.backgroundColor = active ? "#1B262C" : "#fff";
-    // document.querySelector(".main-header-completed-container").style.color = active ? "#d2d2d2ff" : "#555";
     // document.querySelector(".complete-clear").style.borderColor = active ? "rgba(255, 255, 255, 0.302)" : "rgba(0, 0, 0, 0.202)";
-    // document.querySelector(".list-notice").style.color = active ? "#ffffffff" : "#000000ff";
-    // document.querySelector(".list-guide").style.backgroundColor = active ? "#ffffffff" : "#fff";
-    // document.querySelector("body").style.backgroundColor = active ? "#1B262C" : "#fff";
-    // document.querySelector("body").style.backgroundColor = active ? "#1B262C" : "#fff";
 
-    document.documentElement.setAttribute("data-theme", active ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", active ? "light" : "dark");
     toggleTheme()
 }
 
@@ -112,43 +106,57 @@ function generateId() {
 
 //  Gather the inputs from popup and push it in tasks
 
-function addTask() {
-    const taskName = document.querySelector(".task-name-holder input").value;
-    const taskTag = document.querySelector(".task-tag-holder input").value;
-    const taskNote = document.querySelector(".task-note-holder input").value;
-    const taskDate = document.querySelector(".task-date-holder input").value;
-    const taskList = document.querySelector(".task-list-holder select").value;
-    const taskImportance = document.querySelector(".important-check input").checked;
+/**
+ * Gathers the inputs from popup and pushes it in tasks array.
+ * If the task is being edited, it will update the existing task.
+ * If not, it will add a new task to the array.
+ * In the end, it will save the tasks to local storage, render the tasks and close the popup.
+ */
 
-    if (!taskName) return;
+
+function addTask() {
+    const nameInput = document.querySelector(".task-name-holder input");
+    const tagInput = document.querySelector(".task-tag-holder input");
+    const noteInput = document.querySelector(".task-note-holder input");
+    const dateInput = document.querySelector(".task-date-holder input");
+    const listSelect = document.querySelector(".task-list-holder select");
+    const importanceCheckbox = document.querySelector(".important-check input");
+
+    if (!nameInput.value.trim()) return;
 
     if (isEditing) {
-        // Update existing task
         const task = tasks.find(t => t.id === editingTaskId);
         if (task) {
-            task.name = taskName;
-            task.tag = taskTag;
-            task.note = taskNote;
-            task.date = taskDate;
-            task.list = taskList;
-            task.importance = taskImportance;
+            task.name = nameInput.value;
+            task.tag = tagInput.value;
+            task.note = noteInput.value;
+            task.date = dateInput.value;
+            task.list = listSelect.value;
+            task.importance = importanceCheckbox.checked;
         }
         isEditing = false;
         editingTaskId = null;
         document.querySelector(".add-task-button").textContent = "Add Task";
     } else {
-        // Add new task
         tasks.push({
             id: generateId(),
-            name: taskName,
-            tag: taskTag,
-            note: taskNote,
-            date: taskDate,
-            list: taskList,
-            importance: taskImportance,
+            name: nameInput.value,
+            tag: tagInput.value,
+            note: noteInput.value,
+            date: dateInput.value,
+            list: listSelect.value,
+            importance: importanceCheckbox.checked,
             isCompleted: false
         });
     }
+
+    // ✅ Clear the actual inputs
+    nameInput.value = "";
+    tagInput.value = "";
+    noteInput.value = "";
+    dateInput.value = "";
+    listSelect.selectedIndex = 0;
+    importanceCheckbox.checked = false;
 
     saveToStorage();
     renderTasks(tasks);
@@ -156,11 +164,12 @@ function addTask() {
 }
 
 
+
 document.querySelector(".add-task-button").addEventListener("click", addTask)
 
 
 
-//  Show the tasks in the task list  (Only for all section)
+//  Show the tasks in the task list 
 
 function renderTasks(render) {
     // Sort so incomplete tasks come first
@@ -354,11 +363,13 @@ document.querySelector(".list-header-container").addEventListener("click", showA
 //      add a new list to lists
 
 function addList() {
-    const list = document.querySelector(".new-list-name").value
+    let list = document.querySelector(".new-list-name").value
     lists.push(list)
+    list = ""
     saveToStorage()
     showAddList()
     renderLists()
+
 }
 
 document.querySelector(".add-list-button").addEventListener("click", addList)
