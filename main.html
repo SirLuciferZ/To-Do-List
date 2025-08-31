@@ -22,7 +22,7 @@
         />
       </div>
       <div class="button-header-container">
-        <img class="upload-img" src="./icons/upload.svg" alt="" />
+        <div class="dark-mode-container"></div>
         <img class="all-list-img" src="./icons/all-list.svg" alt="" />
         <img class="add-task-img" src="./icons/add-task.svg" alt="" />
       </div>
@@ -104,70 +104,16 @@
       </div>
 
       <div class="complete-clear">
-        <p class="completed-num">0</p>
-        <p>Completed</p>
-        <p>&middot;</p>
+        <div class="main-header-completed-container">
+          <p class="completed-num">0</p>
+          <p>Completed</p>
+          <p>&middot;</p>
+        </div>
         <p class="clear-completed">Clear</p>
         <p class="delete-list clear-completed">Delete List</p>
       </div>
 
-      <div class="task-container">
-        <!-- <div class="tasks">
-          <input type="checkbox" class="is-completed" />
-          <div class="task-info">
-            <div class="task-name">Task Name</div>
-            <div class="task-note">very important</div>
-            <div class="tag-date">
-              <div class="task-date">22/04/2023</div>
-              <div class="task-tags"># home</div>
-            </div>
-          </div>
-        </div>
-        <div class="tasks">
-          <input type="checkbox" class="is-completed" />
-          <div class="task-info">
-            <div class="task-name">Task Name</div>
-            <div class="task-note">very important</div>
-            <div class="tag-date">
-              <div class="task-date">22/04/2023</div>
-              <div class="task-tags"># home</div>
-            </div>
-          </div>
-        </div>
-        <div class="tasks">
-          <input type="checkbox" class="is-completed" />
-          <div class="task-info">
-            <div class="task-name">Task Name</div>
-            <div class="task-note">very important</div>
-            <div class="tag-date">
-              <div class="task-date">22/04/2023</div>
-              <div class="task-tags"># home</div>
-            </div>
-          </div>
-        </div>
-        <div class="tasks">
-          <input type="checkbox" class="is-completed" />
-          <div class="task-info">
-            <div class="task-name">Task Name</div>
-            <div class="task-note">very important</div>
-            <div class="tag-date">
-              <div class="task-date">22/04/2023</div>
-              <div class="task-tags"># home</div>
-            </div>
-          </div>
-        </div>
-        <div class="tasks">
-          <input type="checkbox" class="is-completed" />
-          <div class="task-info">
-            <div class="task-name">Task Name</div>
-            <div class="task-note">very important</div>
-            <div class="tag-date">
-              <div class="task-date">22/04/2023</div>
-              <div class="task-tags"># home</div>
-            </div>
-          </div>
-        </div> -->
-      </div>
+      <div class="task-container"></div>
     </main>
 
     <div class="add-task-popup">
@@ -221,9 +167,10 @@
           <p>
             <strong>Completed:</strong> <span class="details-completed"></span>
           </p>
-          <img class="edit-task-inside" src="./icons/edit-white.svg" />
-          <img class="delete-task-button" src="./icons/delete-white.svg" />
-          
+          <div class="detail-view-icon-container">
+            <img class="edit-task-inside" src="./icons/edit-white.svg" />
+            <img class="delete-task-button" src="./icons/delete-white.svg" />
+          </div>
         </div>
 
         <!-- Edit Mode -->

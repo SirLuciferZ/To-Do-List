@@ -16,7 +16,60 @@ window.addEventListener("DOMContentLoaded", () => {
     renderTasks(tasks);
 });
 
+
+
+//      making the dark mode button interactive
+
+document.querySelector(".dark-mode-container").addEventListener("click", function () {
+    this.classList.toggle("active");
+    changeTheme()
+    // Here you can also toggle your actual dark mode theme
+});
+
+
+//      change the theme to dark mode when the dark mode button is clicked
+
+
+function changeTheme() {
+    const active = document.querySelector(".dark-mode-container").classList.contains("active");
+
+    // document.querySelector("body").style.backgroundColor = active ? "#1B262C" : "#fff";
+    // document.querySelector(".main-header-completed-container").style.color = active ? "#d2d2d2ff" : "#555";
+    // document.querySelector(".complete-clear").style.borderColor = active ? "rgba(255, 255, 255, 0.302)" : "rgba(0, 0, 0, 0.202)";
+    // document.querySelector(".list-notice").style.color = active ? "#ffffffff" : "#000000ff";
+    // document.querySelector(".list-guide").style.backgroundColor = active ? "#ffffffff" : "#fff";
+    // document.querySelector("body").style.backgroundColor = active ? "#1B262C" : "#fff";
+    // document.querySelector("body").style.backgroundColor = active ? "#1B262C" : "#fff";
+
+    document.documentElement.setAttribute("data-theme", active ? "dark" : "light");
+    toggleTheme()
+}
+
+
+
+
+//          set theme to local storage and load it on page load
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+});
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute("data-theme");
+    const next = current === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+}
+
+
+
+
+
+
 //      Make popup window visible
+//      and make backdrop visible
+
 
 function showAddTask() {
     const popup = document.querySelector(".add-task-popup")
@@ -39,6 +92,8 @@ function showAddTask() {
         backdrop.style.pointerEvents = "all"
     }
 }
+
+
 
 
 document
