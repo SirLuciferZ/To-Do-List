@@ -793,7 +793,7 @@ main {
 .task-date-holder input,
 .task-note-holder input,
 .task-tag-holder input {
-    width: 80%;
+    width: 408px;
     padding: 15px;
     border: none;
     border-radius: 10px;
@@ -805,11 +805,22 @@ main {
     transition: all 0.35s;
 }
 
+
+.task-tag-holder input,
+.task-note-holder input {
+    padding-right: 40px;
+}
+
+.task-date-holder input {
+    width: 433px;
+}
+
 .task-tag-holder::after {
     content: "#";
+    color: black;
     position: absolute;
     top: 12px;
-    right: 55px;
+    right: 40px;
     font-size: 20px;
     font-weight: 700;
 }
@@ -818,15 +829,15 @@ main {
     content: url(./icons/note.svg);
     position: absolute;
     top: 12px;
-    right: 50px;
-
+    right: 35px;
+    
 }
 
 
 
 .popup-content input::placeholder {
     font-size: large;
-    color: var(--text-color);
+    color: rgb(168, 168, 168);
 }
 
 .task-list-holder {
@@ -834,7 +845,7 @@ main {
 }
 
 .task-list-holder select {
-    width: 87%;
+    width: 463px;
     padding: 10px;
     border: none;
     outline: none;
@@ -847,20 +858,13 @@ main {
     color: var(--text-color);
 }
 
-.task-list-holder select::after {
-    content: "\25BC";
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: var(--text-color);
-}
 
 .task-list-holder::after {
     content: url(./icons/arrow-down.svg);
     position: absolute;
     z-index: 10000;
     top: 12px;
-    right: 50px;
+    right: 35px;
 }
 
 
@@ -892,10 +896,10 @@ main {
 }
 
 .important-check {
-    width: 87.5%;
+    width: 463px;
     display: flex;
     border-radius: 10px;
-    margin-left: 32px;
+    margin-left: 25px;
     justify-content: center;
     align-items: center;
     background-color: var(--bg-sidebar-sections);
@@ -903,9 +907,9 @@ main {
 }
 
 .important-check label {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 600;
-    margin-right: 40px;
+    margin-right: 20px;
 
 }
 
